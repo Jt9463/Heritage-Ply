@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Childproduct.css">
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="footer.css">
+    <title>Industrial Plywood</title>
+</head>
+
+<body>
+
+    <div id="header-container"></div>
+
+    <div class="container">
+        <main class="main-content">
+            <h1>Industrial Shuttering Plywood</h1>
+            <p>Industrial Shuttering Plywood from Nice Ply offers high strength and durability for formwork applications in construction. It is designed to withstand heavy loads and harsh environmental conditions while ensuring a smooth, consistent finish for concrete surfaces.</p>
+
+            <div class="image-container">
+                <img src="assests/plylook2.jpg" alt="Premium Industrial Shuttering Plywood" class="product-image" onclick="openLightbox(this)">
+            </div>
+
+            <div class="features">
+                <h2>Features of Our Industrial Shuttering Plywood:</h2>
+                <div class="feature-item">
+                    <strong>Superior Strength</strong>
+                    <p>Designed for heavy-duty construction, our industrial shuttering plywood provides unmatched strength and support for large-scale formwork projects.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Moisture and Weather Resistance</strong>
+                    <p>Our plywood is engineered to withstand moisture and adverse weather conditions, making it ideal for use in both indoor and outdoor formwork applications.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>High Durability</strong>
+                    <p>Made with high-quality materials and adhesives, it ensures long-lasting durability even under the stress of frequent re-use in construction projects.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Perfect for Formwork</strong>
+                    <p>Our industrial shuttering plywood is specifically designed for formwork, offering a smooth surface that ensures a high-quality concrete finish.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Reusability</strong>
+                    <p>This plywood is designed for multiple uses, reducing costs and providing excellent value over time with its long life cycle.</p>
+                </div>
+            </div>
+
+        </main>
+
+        <aside class="sidebar">
+            <h3>Our Products</h3>
+            <ul class="products-list">
+                <li><a href="construction.html">Construction Plywood</a></li>
+                <li><a href="Automotive.html">Automotive Plywood</a></li>
+                <li><a href="Industrial.html">Industrial Plywood</a></li>
+            </ul>
+
+            <div class="cta-box">
+                <p>Discover the excellence of Nice Ply's premium plywood products. Crafted with precision and sustainability in mind, we're here to transform your building projects with the best in the industry.</p>
+                <a href="#" class="cta-button">Get A Quote →</a>
+            </div>
+        </aside>
+    </div>
+
+    <div class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+
+        // Load the header
+        document.addEventListener('DOMContentLoaded', function() {
+    fetch('/Header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+            
+            // Initialize header functionality after content is loaded
+            initializeHeader();
+        })
+        .catch(error => {
+            console.error('Error loading header:', error);
+        });
+});
+
+// Function to initialize header functionality
+function initializeHeader() {
+    const hamburger = document.getElementById('hamburger');
+    const navWrapper = document.getElementById('nav-wrapper');
+    const body = document.body;
+
+    if (!hamburger || !navWrapper) {
+        console.error('Header elements not found');
+        return;
+    }
+
+    // Toggle menu function
+    function toggleMenu() {
+        hamburger.classList.toggle('active');
+        navWrapper.classList.toggle('active');
+        body.style.overflow = navWrapper.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // Hamburger click event
+    hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMenu();
+    });
+
+    // Close menu when clicking links
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (navWrapper.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!navWrapper.contains(e.target) && 
+            !hamburger.contains(e.target) && 
+            navWrapper.classList.contains('active')) {
+            toggleMenu();
+        }
+    });
+
+    // Close menu on ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navWrapper.classList.contains('active')) {
+            toggleMenu();
+        }
+    });
+}
+
+
+                // Function to open lightbox
+                function openLightbox(img) {
+            const lightbox = document.querySelector('.lightbox');
+            const lightboxImg = lightbox.querySelector('img');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+        }
+
+        // Function to close lightbox
+        function closeLightbox() {
+            const lightbox = document.querySelector('.lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close lightbox when pressing ESC key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Prevent lightbox image click from closing the lightbox
+        document.querySelector('.lightbox img').addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+
+        //FOOTER 
+
+        fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading footer:', error);
+        });
+
+        //Footer end
+    </script>
+</body>
+
+</html>

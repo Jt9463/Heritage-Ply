@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Heritage Plywood</title>
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="footer.css">
+    <style>
+        .heritage-contact-wrapper {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .heritage-contact-container {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .heritage-contact-info {
+            flex: 1;
+            background: linear-gradient(135deg, #006AB3 0%, #004d82 100%);
+            padding: 50px 30px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heritage-contact-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            transform: rotate(45deg);
+        }
+
+        .heritage-contact-form {
+            flex: 2;
+            padding: 50px;
+            background: white;
+        }
+
+        .heritage-contact-heading {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #006AB3;
+            position: relative;
+        }
+
+        .heritage-contact-info .heritage-contact-heading {
+            color: white;
+        }
+
+        .heritage-contact-info-item {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1em;
+        }
+
+        .heritage-contact-icon {
+            font-size: 1.5em;
+            color: #4CAF50;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .heritage-contact-form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .heritage-contact-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .heritage-contact-input,
+        .heritage-contact-textarea,
+        .heritage-contact-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .heritage-contact-input:focus,
+        .heritage-contact-textarea:focus,
+        .heritage-contact-select:focus {
+            border-color: #006AB3;
+            box-shadow: 0 0 10px rgba(0,106,179,0.1);
+            outline: none;
+        }
+
+        .heritage-contact-textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .heritage-contact-submit {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(76,175,80,0.3);
+        }
+
+        .heritage-contact-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76,175,80,0.4);
+        }
+
+        .heritage-contact-success {
+            display: none;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            animation: heritageContactSlideIn 0.5s ease;
+        }
+
+        @keyframes heritageContactSlideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Media Queries */
+        @media screen and (max-width: 1024px) {
+            .heritage-contact-container {
+                margin: 10px;
+                gap: 20px;
+            }
+            
+            .heritage-contact-form,
+            .heritage-contact-info {
+                padding: 30px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .heritage-contact-container {
+                flex-direction: column;
+                max-width: 600px;
+            }
+
+            .heritage-contact-info {
+                padding: 40px 30px;
+            }
+
+            .heritage-contact-info-item {
+                font-size: 1em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .heritage-contact-wrapper {
+                padding: 10px;
+            }
+
+            .heritage-contact-container {
+                margin: 0;
+                border-radius: 15px;
+            }
+
+            .heritage-contact-form,
+            .heritage-contact-info {
+                padding: 20px;
+            }
+
+            .heritage-contact-heading {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+
+            .heritage-contact-submit {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .heritage-contact-info-item {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <div class="heritage-contact-wrapper">
+        <div class="heritage-contact-container">
+            <div class="heritage-contact-info">
+                <h2 class="heritage-contact-heading">Get in Touch</h2>
+                <div class="heritage-contact-info-item">
+                    <i class="heritage-contact-icon">📍</i>
+                    <div>123 Plywood Street<br>Industrial Area<br>Your City, State ZIP</div>
+                </div>
+                <div class="heritage-contact-info-item">
+                    <i class="heritage-contact-icon">📞</i>
+                    <div>+1 (XXX) XXX-XXXX<br>+1 (XXX) XXX-XXXX</div>
+                </div>
+                <div class="heritage-contact-info-item">
+                    <i class="heritage-contact-icon">✉️</i>
+                    <div>info@heritageplywood.com<br>sales@heritageplywood.com</div>
+                </div>
+                <div class="heritage-contact-info-item">
+                    <i class="heritage-contact-icon">⏰</i>
+                    <div>Monday - Friday: 9AM-5PM<br>Saturday: 9AM-1PM</div>
+                </div>
+            </div>
+
+            <div class="heritage-contact-form">
+                <h2 class="heritage-contact-heading">Send us a Message</h2>
+                <form id="heritageContactForm">
+                    <div class="heritage-contact-form-group">
+                        <label class="heritage-contact-label" for="name">Full Name*</label>
+                        <input class="heritage-contact-input" type="text" id="name" required placeholder="Enter your name">
+                    </div>
+
+                    <div class="heritage-contact-form-group">
+                        <label class="heritage-contact-label" for="email">Email Address*</label>
+                        <input class="heritage-contact-input" type="email" id="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="heritage-contact-form-group">
+                        <label class="heritage-contact-label" for="phone">Phone Number</label>
+                        <input class="heritage-contact-input" type="tel" id="phone" placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="heritage-contact-form-group">
+                        <label class="heritage-contact-label" for="subject">Type of Plywood*</label>
+                        <select class="heritage-contact-select" id="subject" required>
+                            <option value="">Select plywood type</option>
+                            <option value="construction">Construction Plywood</option>
+                            <option value="industrial">Industrial Plywood</option>
+                            <option value="automotive">Automotive Plywood</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="heritage-contact-form-group">
+                        <label class="heritage-contact-label" for="message">Message*</label>
+                        <textarea class="heritage-contact-textarea" id="message" required placeholder="How can we help you?"></textarea>
+                    </div>
+
+                    <button class="heritage-contact-submit" type="submit">Send Message</button>
+                </form>
+                <div id="heritageSuccessMessage" class="heritage-contact-success">
+                    Thank you for your message! We'll get back to you soon.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <div id="footer-container"></div>
+
+    <script src="Header.js"></script>
+    <script>
+        // Load the header
+        fetch('/Header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+
+                // Load footer
+                document.addEventListener('DOMContentLoaded', function() {
+            fetch('/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                });
+        });
+
+        
+        document.getElementById('heritageContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const successMessage = document.getElementById('heritageSuccessMessage');
+            successMessage.style.display = 'block';
+            
+            this.reset();
+            
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+
+        const formFields = document.querySelectorAll('.heritage-contact-input, .heritage-contact-textarea, .heritage-contact-select');
+        formFields.forEach(field => {
+            field.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-5px)';
+            });
+            
+            field.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

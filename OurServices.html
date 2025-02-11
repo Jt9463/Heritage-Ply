@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heritage Plywood Solutions</title>
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="footer.css">
+    <style>
+:root {
+    --heritage-blue: #005B94;    /* From logo */
+    --heritage-green: #75B644;   /* From logo */
+    --heritage-gray: #424242;    /* From logo text */
+    --heritage-light-gray: #F5F5F5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.header {
+    background: white;
+    padding: 15px 40px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border-bottom: 4px solid var(--heritage-green);
+}
+
+.header.scrolled {
+    padding: 10px 40px;
+    background: rgba(255, 255, 255, 0.98);
+}
+
+.logo {
+    max-width: 220px;
+    transition: all 0.3s ease;
+}
+
+.header.scrolled .logo {
+    max-width: 200px;
+}
+
+.hero {
+    background: linear-gradient(135deg, 
+        rgba(0,91,148,0.95), 
+        rgba(117,182,68,0.85)), 
+        url('/api/placeholder/1920/600');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 180px 20px 120px;
+    text-align: center;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero p {
+    font-size: 1.4em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: -50px auto 50px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.section-title {
+    text-align: center;
+    color: var(--heritage-gray);
+    margin-bottom: 60px;
+    position: relative;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--heritage-blue), var(--heritage-green));
+    margin: 20px auto;
+    border-radius: 2px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.service-card {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--heritage-blue), var(--heritage-green));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
+}
+
+.service-card h3 {
+    color: var(--heritage-blue);
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    position: relative;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.service-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--heritage-green);
+}
+
+.service-card p {
+    color: var(--heritage-gray);
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, var(--heritage-blue), var(--heritage-green));
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+    clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);
+}
+
+.cta-section h2 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.cta-section p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 18px 45px;
+    background: white;
+    color: var(--heritage-blue);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    background: var(--heritage-gray);
+    color: white;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, var(--heritage-blue), var(--heritage-green));
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-size: 24px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+}
+
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hero h1 {
+        font-size: 2.8em;
+    }
+    .section-title {
+        font-size: 2.2em;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+    .hero {
+        padding: 140px 20px 100px;
+    }
+    .hero h1 {
+        font-size: 2.2em;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .section-title {
+        font-size: 2em;
+    }
+    .cta-section h2 {
+        font-size: 2.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 120px 20px 80px;
+    }
+    .hero h1 {
+        font-size: 1.8em;
+    }
+    .hero p {
+        font-size: 1.1em;
+        letter-spacing: 2px;
+    }
+    .service-card {
+        padding: 30px 20px;
+    }
+    .cta-section {
+        padding: 80px 20px;
+    }
+    .cta-section h2 {
+        font-size: 1.8em;
+    }
+    .cta-button {
+        padding: 15px 35px;
+        font-size: 1em;
+    }
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <section class="hero">
+        <h1>Premium Plywood Solutions</h1>
+        <p>Construction • Industrial • Automotive</p>
+    </section>
+
+    <div class="services-container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Construction Plywood</h3>
+                <p>High-quality shuttering plywood engineered for construction projects. Our products ensure durability, strength, and perfect finishing for all your construction needs.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Industrial Plywood</h3>
+                <p>Specialized industrial-grade plywood designed for manufacturing and heavy-duty applications. Built to withstand demanding industrial environments.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Automotive Plywood</h3>
+                <p>Custom-engineered plywood solutions for the automotive industry. Meeting strict quality standards and specifications for vehicle manufacturing.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Custom Solutions</h3>
+                <p>Tailored plywood solutions to meet your specific requirements. Our expert team works with you to deliver exactly what you need.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Quality Assurance</h3>
+                <p>Rigorous quality control processes ensure our products meet international standards. Every sheet is inspected for excellence.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Technical Support</h3>
+                <p>Expert technical assistance and consultation for your projects. Our team helps you choose the right products for your application.</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="cta-section">
+        <h2>Ready to Start Your Project?</h2>
+        <p>Contact us today for premium plywood solutions</p>
+        <a href="#contact" class="cta-button">Get in Touch</a>
+    </section>
+
+    <div class="scroll-to-top">↑</div>
+
+    <div id="footer-container"></div>
+
+    <script src="Header.js"></script>
+    <script>
+        // Load the header
+        fetch('/Header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            const scrollTop = document.querySelector('.scroll-to-top');
+            
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Show/hide scroll to top button
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top functionality
+        document.querySelector('.scroll-to-top').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Load footer
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-container').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>
