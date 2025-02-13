@@ -65,120 +65,99 @@
     </div>
 
     <div class="lightbox" onclick="closeLightbox()">
-        <span class="close-lightbox">&times;</span>
+        <span class="close-lightbox"></span>
     </div>
 
-    <div id="footer-placeholder"></div>
-
+    <div id="footer-container"></div>
+    <script src="Header.js"></script>
     <script>
-
-        // Load the header
-        document.addEventListener('DOMContentLoaded', function() {
-    fetch('/Header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header-container').innerHTML = data;
-            
-            // Initialize header functionality after content is loaded
-            initializeHeader();
-        })
-        .catch(error => {
-            console.error('Error loading header:', error);
-        });
-});
-
-// Function to initialize header functionality
-function initializeHeader() {
-    const hamburger = document.getElementById('hamburger');
-    const navWrapper = document.getElementById('nav-wrapper');
-    const body = document.body;
-
-    if (!hamburger || !navWrapper) {
-        console.error('Header elements not found');
-        return;
-    }
-
-    // Toggle menu function
-    function toggleMenu() {
-        hamburger.classList.toggle('active');
-        navWrapper.classList.toggle('active');
-        body.style.overflow = navWrapper.classList.contains('active') ? 'hidden' : '';
-    }
-
-    // Hamburger click event
-    hamburger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleMenu();
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/footer.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+                // Optionally display a fallback footer or error message
+                document.getElementById('footer-container').innerHTML = 
+                    '<p style="text-align: center; padding: 20px;">Failed to load footer</p>';
+            });
     });
 
-    // Close menu when clicking links
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', function() {
-            if (navWrapper.classList.contains('active')) {
-                toggleMenu();
+        function initializeHeader() {
+            const hamburger = document.getElementById('hamburger');
+            const navWrapper = document.getElementById('nav-wrapper');
+            const body = document.body;
+
+            if (!hamburger || !navWrapper) {
+                console.error('Header elements not found');
+                return;
             }
-        });
-    });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!navWrapper.contains(e.target) && 
-            !hamburger.contains(e.target) && 
-            navWrapper.classList.contains('active')) {
-            toggleMenu();
+            function toggleMenu() {
+                hamburger.classList.toggle('active');
+                navWrapper.classList.toggle('active');
+                body.style.overflow = navWrapper.classList.contains('active') ? 'hidden' : '';
+            }
+
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMenu();
+            });
+
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navWrapper.classList.contains('active')) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!navWrapper.contains(e.target) && !hamburger.contains(e.target) && navWrapper.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navWrapper.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
         }
-    });
 
-    // Close menu on ESC key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navWrapper.classList.contains('active')) {
-            toggleMenu();
-        }
-    });
-}
-
-
-                // Function to open lightbox
-                function openLightbox(img) {
+        function openLightbox(img) {
             const lightbox = document.querySelector('.lightbox');
             const lightboxImg = lightbox.querySelector('img');
             lightboxImg.src = img.src;
             lightboxImg.alt = img.alt;
             lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+            document.body.style.overflow = 'hidden';
         }
 
-        // Function to close lightbox
         function closeLightbox() {
             const lightbox = document.querySelector('.lightbox');
             lightbox.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
 
-        // Close lightbox when pressing ESC key
-        document.addEventListener('keydown', function (e) {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeLightbox();
             }
         });
 
-        // Prevent lightbox image click from closing the lightbox
-        document.querySelector('.lightbox img').addEventListener('click', function (e) {
+        document.querySelector('.lightbox img').addEventListener('click', function(e) {
             e.stopPropagation();
         });
 
-        //FOOTER 
-
-        fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer-placeholder').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error loading footer:', error);
-        });
-
-        //Footer end
+                
     </script>
 </body>
 

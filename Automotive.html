@@ -71,21 +71,27 @@
         <span class="close-lightbox"></span>
     </div>
 
-    <div id="footer-placeholder"></div>
-
+    <div id="footer-container"></div>
+    <script src="Header.js"></script>
     <script>
-        // Load the header
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/Header.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('header-container').innerHTML = data;
-                    initializeHeader();
-                })
-                .catch(error => {
-                    console.error('Error loading header:', error);
-                });
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/footer.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+                // Optionally display a fallback footer or error message
+                document.getElementById('footer-container').innerHTML = 
+                    '<p style="text-align: center; padding: 20px;">Failed to load footer</p>';
+            });
+    });
 
         function initializeHeader() {
             const hamburger = document.getElementById('hamburger');
@@ -154,14 +160,7 @@
             e.stopPropagation();
         });
 
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Error loading footer:', error);
-            });
+                
     </script>
 </body>
 
