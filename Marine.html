@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Childproduct.css">
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="footer.css">
+    <title>Heritage Marine Plywood</title>
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <div class="container">
+        <main class="main-content">
+            <h1>Marine Plywood</h1>
+            <p>Heritage Ply's Marine Grade Plywood is engineered for exceptional water resistance and durability, making it the ideal choice for marine applications and high-moisture environments. Our marine plywood meets the highest industry standards while delivering superior performance and reliability.</p>
+
+            <div class="image-container">
+                <img src="assests/marine.jpg" alt="Marine Grade Plywood" class="product-image" onclick="openLightbox(this)">
+            </div>
+
+            <div class="features">
+                <h2>Features of Our Marine Plywood:</h2>
+                <div class="feature-item">
+                    <strong>Advanced Water Resistance</strong>
+                    <p>Manufactured with specialized water-resistant adhesives and treatments, our marine plywood offers exceptional protection against water damage, delamination, and decay.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Premium Grade Timber</strong>
+                    <p>Crafted using carefully selected hardwood veneers that are specially treated and processed to ensure maximum durability and resistance to marine environments.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Structural Stability</strong>
+                    <p>Engineered to maintain dimensional stability and structural integrity even under challenging marine conditions, preventing warping and splitting.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Weather Resistant</strong>
+                    <p>Designed to withstand extreme weather conditions, UV exposure, and temperature variations while maintaining its strength and appearance.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Versatile Applications</strong>
+                    <p>Perfect for boat building, dock construction, marine furniture, and other applications where exposure to moisture and marine environments is a concern.</p>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <h3>Our Products</h3>
+            <ul class="products-list">
+                <li><a href="Flush.html">Flush Doors</a></li>
+                <li><a href="Industrial.html">Industrial Plywood</a></li>
+                <li><a href="Pinnacle.html">Pinnacle Plywood</a></li>
+                <li><a href="#">Marine Plywood</a></li>
+                <li><a href="Shuttering.html">Shuttering Plywood</a></li>
+                <li><a href="Chequered.html">Chequered Plywood</a></li>
+            </ul>
+
+            <div class="cta-box">
+                <p>Discover the superior quality of Heritage Ply's marine-grade plywood. Engineered for excellence and built to last in demanding marine environments.</p>
+                <a href="#" class="cta-button">Get A Quote →</a>
+            </div>
+        </aside>
+    </div>
+
+    <div class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox"></span>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script src="Header.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/footer.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+                document.getElementById('footer-container').innerHTML = 
+                    '<p style="text-align: center; padding: 20px;">Failed to load footer</p>';
+            });
+    });
+
+    function initializeHeader() {
+        const hamburger = document.getElementById('hamburger');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const body = document.body;
+
+        if (!hamburger || !navWrapper) {
+            console.error('Header elements not found');
+            return;
+        }
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navWrapper.classList.toggle('active');
+            body.style.overflow = navWrapper.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (navWrapper.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!navWrapper.contains(e.target) && !hamburger.contains(e.target) && navWrapper.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navWrapper.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    }
+
+    function openLightbox(img) {
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.createElement('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.appendChild(lightboxImg);
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        const lightbox = document.querySelector('.lightbox');
+        lightbox.classList.remove('active');
+        const img = lightbox.querySelector('img');
+        if (img) {
+            lightbox.removeChild(img);
+        }
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+    </script>
+</body>
+</html>

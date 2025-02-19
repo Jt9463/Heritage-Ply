@@ -251,7 +251,7 @@ body {
         const products = [
             {
                 id: 1,
-                title: 'Construction Plywood',
+                title: 'Flush Doors',
                 description: 'High-grade plywood ideal for construction and building projects. Known for durability and strength.',
                 features: ['Moisture resistant', 'High structural integrity', 'Multiple size options'],
                 detailDescription: 'Our Construction Plywood is engineered to meet the highest standards of building and construction requirements. Perfect for both residential and commercial projects.',
@@ -261,7 +261,7 @@ body {
                     grades: ['A/A', 'A/B', 'B/B'],
                     certification: 'ISO 9001:2015'
                 },
-                image: 'assests/plylook.jpg'  // Image path for construction plywood 
+                image: 'assests/flush.jpg'  // Image path for construction plywood 
             },
             {
                 id: 2,
@@ -279,7 +279,7 @@ body {
             },
             {
                 id: 3,
-                title: 'Automotive Plywood',
+                title: 'Pinnacle Plywood',
                 description: 'Specialized plywood designed for automotive applications with superior performance.',
                 features: ['Lightweight', 'Impact resistant', 'Premium finish'],
                 detailDescription: 'Premium automotive plywood specifically engineered for vehicle manufacturing and customization.',
@@ -289,7 +289,49 @@ body {
                     grades: ['Automotive Grade A+', 'Automotive Grade A'],
                     certification: 'IATF 16949'
                 },
-                image: 'assests/plylook3.jpg'  // Image path for automotive plywood
+                image: 'assests/pinnacle.webp'  // Image path for automotive plywood
+            },
+            {
+                id: 4,
+                title: 'Marine Plywood',
+                description: 'Specialized plywood designed for automotive applications with superior performance.',
+                features: ['Lightweight', 'Impact resistant', 'Premium finish'],
+                detailDescription: 'Premium automotive plywood specifically engineered for vehicle manufacturing and customization.',
+                specifications: {
+                    sizes: ['Custom sizes available'],
+                    thickness: ['10mm', '15mm', '20mm'],
+                    grades: ['Automotive Grade A+', 'Automotive Grade A'],
+                    certification: 'IATF 16949'
+                },
+                image: 'assests/marine.jpg'  // Image path for automotive plywood
+            },
+            {
+                id: 5,
+                title: 'Shuttering Plywood',
+                description: 'Specialized plywood designed for automotive applications with superior performance.',
+                features: ['Lightweight', 'Impact resistant', 'Premium finish'],
+                detailDescription: 'Premium automotive plywood specifically engineered for vehicle manufacturing and customization.',
+                specifications: {
+                    sizes: ['Custom sizes available'],
+                    thickness: ['10mm', '15mm', '20mm'],
+                    grades: ['Automotive Grade A+', 'Automotive Grade A'],
+                    certification: 'IATF 16949'
+                },
+                image: 'assests/Shuttering.jpg'  // Image path for automotive plywood
+            },
+            {
+                id: 6,
+                title: 'Chequered Plywood',
+                description: 'Specialized plywood designed for automotive applications with superior performance.',
+                features: ['Lightweight', 'Impact resistant', 'Premium finish'],
+                detailDescription: 'Premium automotive plywood specifically engineered for vehicle manufacturing and customization.',
+                specifications: {
+                    sizes: ['Custom sizes available'],
+                    thickness: ['10mm', '15mm', '20mm'],
+                    grades: ['Automotive Grade A+', 'Automotive Grade A'],
+                    certification: 'IATF 16949'
+                },
+                image: 'assests/chequered.jpeg'  // Image path for automotive plywood
             }
         ];
 
@@ -335,13 +377,19 @@ body {
 
         // Redirect to the product's specific page based on its ID
         if (productId === 1) {
-            window.location.href = 'Construction.html';  // Redirect to product-1.html
+            window.location.href = 'Flush.html';  // Redirect to product-1.html
         } else if (productId === 2) {
             window.location.href = 'Industrial.html';  // Redirect to product-2.html
         } else if (productId === 3) {
-            window.location.href = 'Automotive.html';  // Redirect to product-3.html
-        }
+            window.location.href = 'Pinnacle.html';  // Redirect to product-3.html
+        } else if (productId === 4) {
+            window.location.href = 'Marine.html';
+        } else if (productId === 5) {
+            window.location.href = 'Shuttering.html';  // Redirect to product-5.html
+        } else if (productId === 6) {
+            window.location.href = 'Chequered.html';  
     }
+}
 }
 
         // Initialize the products

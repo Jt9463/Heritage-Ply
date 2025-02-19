@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Childproduct.css">
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="footer.css">
+    <title>Heritage Flush Doors</title>
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <div class="container">
+        <main class="main-content">
+            <h1>Premium Flush Doors</h1>
+            <p>Heritage Ply's Premium Flush Doors combine elegance with durability, offering a perfect blend of style and functionality for both residential and commercial spaces. Our flush doors are crafted with precision to ensure lasting quality and superior finish.</p>
+
+            <div class="image-container">
+                <img src="assests/flush.jpg" alt="Premium Flush Doors" class="product-image" onclick="openLightbox(this)">
+            </div>
+
+            <div class="features">
+                <h2>Features of Our Flush Doors:</h2>
+                <div class="feature-item">
+                    <strong>Superior Construction</strong>
+                    <p>Engineered with a solid core and premium-grade wood veneers, our flush doors provide exceptional strength and stability for long-lasting performance.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Moisture Resistant</strong>
+                    <p>Treated with advanced moisture-resistant technology, our doors are designed to withstand varying humidity levels and maintain their shape and structure.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Acoustic Performance</strong>
+                    <p>Our flush doors offer excellent sound insulation properties, making them ideal for both residential spaces and commercial environments where privacy is essential.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Elegant Finish</strong>
+                    <p>Available in a wide range of premium finishes and veneers, our flush doors complement any interior décor while maintaining their smooth, sophisticated appearance.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Easy Maintenance</strong>
+                    <p>Designed for hassle-free maintenance, our flush doors require minimal upkeep while retaining their beautiful appearance for years to come.</p>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <h3>Our Products</h3>
+            <ul class="products-list">
+                <li><a href="#">Flush Doors</a></li>
+                <li><a href="Industrial.html">Industrial Plywood</a></li>
+                <li><a href="Pinnacle.html">Pinnacle Plywood</a></li>
+                <li><a href="Marine.html">Marine Plywood</a></li>
+                <li><a href="Shuttering.html">Shuttering Plywood</a></li>
+                <li><a href="Chequered.html">Chequered Plywood</a></li>
+            </ul>
+
+            <div class="cta-box">
+                <p>Experience the premium quality of Heritage Ply's flush doors. Built with excellence and designed for lasting beauty, our doors are the perfect choice for your space.</p>
+                <a href="#" class="cta-button">Get A Quote →</a>
+            </div>
+        </aside>
+    </div>
+
+    <div class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox"></span>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script src="Header.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/footer.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+                document.getElementById('footer-container').innerHTML = 
+                    '<p style="text-align: center; padding: 20px;">Failed to load footer</p>';
+            });
+    });
+
+    function initializeHeader() {
+        const hamburger = document.getElementById('hamburger');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const body = document.body;
+
+        if (!hamburger || !navWrapper) {
+            console.error('Header elements not found');
+            return;
+        }
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navWrapper.classList.toggle('active');
+            body.style.overflow = navWrapper.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (navWrapper.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!navWrapper.contains(e.target) && !hamburger.contains(e.target) && navWrapper.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navWrapper.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    }
+
+    function openLightbox(img) {
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.createElement('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.appendChild(lightboxImg);
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        const lightbox = document.querySelector('.lightbox');
+        lightbox.classList.remove('active');
+        const img = lightbox.querySelector('img');
+        if (img) {
+            lightbox.removeChild(img);
+        }
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+    </script>
+</body>
+</html>

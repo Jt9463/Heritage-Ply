@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Childproduct.css">
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="footer.css">
+    <title>Heritage Pinnacle Plywood</title>
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <div class="container">
+        <main class="main-content">
+            <h1>Pinnacle Plywood</h1>
+            <p>Heritage Ply's Pinnacle Plywood represents the apex of plywood manufacturing excellence, delivering unmatched quality and versatility for premium construction and furniture applications. Each sheet is meticulously crafted to ensure superior strength, exceptional durability, and outstanding aesthetic appeal.</p>
+
+            <div class="image-container">
+                <img src="assests/pinnacle.webp" alt="Pinnacle Plywood" class="product-image" onclick="openLightbox(this)">
+            </div>
+
+            <div class="features">
+                <h2>Features of Our Pinnacle Plywood:</h2>
+                <div class="feature-item">
+                    <strong>Premium Grade Material</strong>
+                    <p>Manufactured using carefully selected premium hardwood veneers and advanced bonding technology to ensure superior quality and exceptional durability.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Enhanced Durability</strong>
+                    <p>Engineered with multiple layers of cross-laminated veneers to provide exceptional strength and resistance to warping, making it ideal for high-end applications.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Weather Resistant</strong>
+                    <p>Treated with specialized weather-resistant compounds to withstand various environmental conditions, ensuring long-lasting performance in both interior and exterior applications.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Versatile Applications</strong>
+                    <p>Perfect for luxury furniture, high-end cabinetry, premium architectural installations, and exclusive interior design projects where quality cannot be compromised.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Superior Finish</strong>
+                    <p>Features an exceptionally smooth surface that accepts all types of finishes, veneers, and laminates, making it ideal for premium decorative applications.</p>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <h3>Our Products</h3>
+            <ul class="products-list">
+                <li><a href="Flush.html">Flush Doors</a></li>
+                <li><a href="Industrial.html">Industrial Plywood</a></li>
+                <li><a href="#">Pinnacle Plywood</a></li>
+                <li><a href="Marine.html">Marine Plywood</a></li>
+                <li><a href="Shuttering.html">Shuttering Plywood</a></li>
+                <li><a href="Chequered.html">Chequered Plywood</a></li>
+            </ul>
+
+            <div class="cta-box">
+                <p>Discover the exceptional quality of Heritage Ply's Pinnacle Plywood. When only the best will do, choose Pinnacle Plywood for your premium construction and furniture needs.</p>
+                <a href="#" class="cta-button">Get A Quote →</a>
+            </div>
+        </aside>
+    </div>
+
+    <div class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox"></span>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script src="Header.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/footer.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+                document.getElementById('footer-container').innerHTML = 
+                    '<p style="text-align: center; padding: 20px;">Failed to load footer</p>';
+            });
+    });
+
+    function initializeHeader() {
+        const hamburger = document.getElementById('hamburger');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const body = document.body;
+
+        if (!hamburger || !navWrapper) {
+            console.error('Header elements not found');
+            return;
+        }
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navWrapper.classList.toggle('active');
+            body.style.overflow = navWrapper.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (navWrapper.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!navWrapper.contains(e.target) && !hamburger.contains(e.target) && navWrapper.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navWrapper.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    }
+
+    function openLightbox(img) {
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.createElement('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.appendChild(lightboxImg);
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        const lightbox = document.querySelector('.lightbox');
+        lightbox.classList.remove('active');
+        const img = lightbox.querySelector('img');
+        if (img) {
+            lightbox.removeChild(img);
+        }
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+    </script>
+</body>
+</html>

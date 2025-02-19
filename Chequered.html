@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Childproduct.css">
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="footer.css">
+    <title>Heritage Chequered Plywood</title>
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <div class="container">
+        <main class="main-content">
+            <h1>Chequered Plywood</h1>
+            <p>Heritage Ply's Chequered Plywood is engineered for superior anti-skid performance and exceptional durability. Our premium-grade chequered plywood is perfect for flooring applications in commercial vehicles, loading platforms, and industrial spaces where safety and strength are paramount.</p>
+
+            <div class="image-container">
+                <img src="assests/chequered.jpeg" alt="Chequered Plywood" class="product-image" onclick="openLightbox(this)">
+            </div>
+
+            <div class="features">
+                <h2>Features of Our Chequered Plywood:</h2>
+                <div class="feature-item">
+                    <strong>Anti-Skid Surface</strong>
+                    <p>Manufactured with a distinctive chequered pattern that provides excellent grip and traction, ensuring safety in high-traffic areas and wet conditions.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Heavy-Duty Construction</strong>
+                    <p>Built with multiple layers of selected hardwood veneers and premium-quality core material, ensuring exceptional load-bearing capacity and structural stability.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Weather Resistant</strong>
+                    <p>Treated with advanced weather-resistant chemicals and bonded with marine-grade adhesives, making it suitable for both indoor and outdoor applications.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Versatile Application</strong>
+                    <p>Ideal for commercial vehicle flooring, loading bays, ramps, stages, platforms, and industrial flooring where high strength and slip resistance are essential.</p>
+                </div>
+                <div class="feature-item">
+                    <strong>Durable Finish</strong>
+                    <p>Features a tough, wear-resistant surface that maintains its anti-skid properties even under heavy use and frequent cleaning.</p>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <h3>Our Products</h3>
+            <ul class="products-list">
+                <li><a href="Flush.html">Flush Doors</a></li>
+                <li><a href="Industrial.html">Industrial Plywood</a></li>
+                <li><a href="Pinnacle.html">Pinnacle Plywood</a></li>
+                <li><a href="Marine.html">Marine Plywood</a></li>
+                <li><a href="Shuttering.html">Shuttering Plywood</a></li>
+                <li><a href="#">Chequered Plywood</a></li>
+            </ul>
+
+            <div class="cta-box">
+                <p>Discover the superior quality and safety features of Heritage Ply's Chequered Plywood. Engineered for excellence and designed for maximum grip and durability.</p>
+                <a href="#" class="cta-button">Get A Quote →</a>
+            </div>
+        </aside>
+    </div>
+
+    <div class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox"></span>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script src="Header.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/footer.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+                document.getElementById('footer-container').innerHTML = 
+                    '<p style="text-align: center; padding: 20px;">Failed to load footer</p>';
+            });
+    });
+
+    function initializeHeader() {
+        const hamburger = document.getElementById('hamburger');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const body = document.body;
+
+        if (!hamburger || !navWrapper) {
+            console.error('Header elements not found');
+            return;
+        }
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navWrapper.classList.toggle('active');
+            body.style.overflow = navWrapper.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (navWrapper.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!navWrapper.contains(e.target) && !hamburger.contains(e.target) && navWrapper.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navWrapper.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    }
+
+    function openLightbox(img) {
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.createElement('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.appendChild(lightboxImg);
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        const lightbox = document.querySelector('.lightbox');
+        lightbox.classList.remove('active');
+        const img = lightbox.querySelector('img');
+        if (img) {
+            lightbox.removeChild(img);
+        }
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+    </script>
+</body>
+</html>
